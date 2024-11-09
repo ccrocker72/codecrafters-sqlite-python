@@ -15,6 +15,8 @@ if command == ".dbinfo":
         # Uncomment this to pass the first stage
         database_file.seek(16)  # Skip the first 16 bytes of the header
         page_size = int.from_bytes(database_file.read(2), byteorder="big")
-        print(f"database page size: {page_size}")
+        print(f"database page size: {page_size}/n")
+        number_of_tables = sum(line.count(b"CREATE TABLE") for line in database_file)
+        print(f"number of tables: {number_of_tables}")
 else:
     print(f"Invalid command: {command}")
